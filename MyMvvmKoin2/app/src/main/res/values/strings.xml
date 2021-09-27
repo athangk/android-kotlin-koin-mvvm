@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyMvvmKoin</string>
+    <string name="btn_get_users">Press to get Users</string>
+    <string name="no_results">No results to show!</string>
+</resources>

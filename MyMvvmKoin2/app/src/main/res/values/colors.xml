@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="calendar_main">#5283BB</color>
+    <color name="greyed_out">#82717070</color>
+    <color name="grey_holder">#fcfcfc</color>
+    <color name="summer">#5283BB</color>
+</resources>
