@@ -1,4 +1,5 @@
 # MyMvvmKoin
 
+Simple Android App with Kotlin and MVVM architechure with Koin dependency injection.
 
-Press the button to get the first 30ish ~ github users in alphabetical order
+Fetches the first 30ish ~ github users in alphabetical order
