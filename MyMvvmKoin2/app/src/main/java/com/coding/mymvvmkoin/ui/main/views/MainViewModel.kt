@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coding.mymvvmkoin.data.GitHubRepository
-import com.coding.mymvvmkoin.model.GitHubUserModel
+import com.coding.mymvvmkoin.models.GitHubUserModel
 import com.coding.mymvvmkoin.utilities.ERROR_EXCEPTION_MSG
 import com.coding.mymvvmkoin.utilities.MY_MVVM_TAG
 import kotlinx.coroutines.Dispatchers

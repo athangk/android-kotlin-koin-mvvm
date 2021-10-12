@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.*
 import com.coding.mymvvmkoin.adapters.GitHubUserRecyclerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.coding.mymvvmkoin.databinding.MainFragmentBinding
-import com.coding.mymvvmkoin.model.GitHubUserModel
+import com.coding.mymvvmkoin.models.GitHubUserModel
 import com.coding.mymvvmkoin.utilities.MY_MVVM_TAG
 
 class MainFragment : Fragment() {

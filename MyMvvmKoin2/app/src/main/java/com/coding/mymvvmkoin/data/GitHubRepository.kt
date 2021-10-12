@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import com.coding.mymvvmkoin.data.openHab.GitHubDao
 import com.coding.mymvvmkoin.data.openHab.GitHubEntity
 import com.coding.mymvvmkoin.network.GitHubAPI
-import com.coding.mymvvmkoin.model.GitHubUserModel
+import com.coding.mymvvmkoin.models.GitHubUserModel
 import com.coding.mymvvmkoin.utilities.ERROR_EXCEPTION_MSG
 import com.coding.mymvvmkoin.utilities.MY_MVVM_TAG
 import java.util.*

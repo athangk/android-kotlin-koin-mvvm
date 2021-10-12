@@ -1,6 +1,6 @@
 package com.coding.mymvvmkoin.network
 
-import com.coding.mymvvmkoin.model.GitHubItemModel
+import com.coding.mymvvmkoin.models.GitHubItemModel
 import retrofit2.Response
 import retrofit2.http.*
 

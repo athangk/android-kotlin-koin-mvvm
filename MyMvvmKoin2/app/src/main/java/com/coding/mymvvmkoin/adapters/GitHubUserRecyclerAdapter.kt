@@ -9,7 +9,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.coding.mymvvmkoin.databinding.GithubUserItemBinding
-import com.coding.mymvvmkoin.model.GitHubUserModel
+import com.coding.mymvvmkoin.models.GitHubUserModel
 import com.squareup.picasso.Picasso
 import androidx.lifecycle.ViewModel
 
