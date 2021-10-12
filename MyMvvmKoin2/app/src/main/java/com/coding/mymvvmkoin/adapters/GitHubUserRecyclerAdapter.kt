@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coding.mymvvmkoin.databinding.GithubUserItemBinding
 import com.coding.mymvvmkoin.model.GitHubUserModel
 import com.squareup.picasso.Picasso
+import androidx.lifecycle.ViewModel
 
-
-class GitHubUserRecyclerAdapter(private val listData: ArrayList<GitHubUserModel>, private val mContext:Context) : RecyclerView.Adapter<GitHubUserRecyclerAdapter.ViewHolder>() {
+class GitHubUserRecyclerAdapter(private var listData: ArrayList<GitHubUserModel>, private val mContext:Context) : RecyclerView.Adapter<GitHubUserRecyclerAdapter.ViewHolder>() {
 
     private lateinit var binding: GithubUserItemBinding
-    private val finalSize = listData.size - 1
     lateinit var viewContext: Context
 
 
@@ -32,10 +31,8 @@ class GitHubUserRecyclerAdapter(private val listData: ArrayList<GitHubUserModel>
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var posReverse = (finalSize+1) - (position + 1);
-        holder.githubUserName.text = listData[posReverse].username
-
-        Picasso.with(mContext).load(listData[posReverse].avatarURL).into(holder.githubUserImage);
+        holder.githubUserName.text = listData[position].username
+        Picasso.with(mContext).load(listData[position].avatarURL).into(holder.githubUserImage);
 
     }
 
@@ -44,6 +41,17 @@ class GitHubUserRecyclerAdapter(private val listData: ArrayList<GitHubUserModel>
         return listData.size
     }
 
+
+    fun clearData() {
+        listData.clear()
+        notifyDataSetChanged()
+    }
+
+    fun updateData(updatedUserData: ArrayList<GitHubUserModel>) {
+        listData.clear()
+        listData = updatedUserData
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(binding: GithubUserItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var githubUserName: TextView = binding.githubUserName

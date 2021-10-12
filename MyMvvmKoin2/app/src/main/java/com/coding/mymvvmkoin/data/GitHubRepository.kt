@@ -5,11 +5,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.coding.mymvvmkoin.data.openHab.GitHubDao
 import com.coding.mymvvmkoin.data.openHab.GitHubEntity
-import com.coding.mymvvmkoin.di.network.GitHubAPI
+import com.coding.mymvvmkoin.network.GitHubAPI
 import com.coding.mymvvmkoin.model.GitHubUserModel
 import com.coding.mymvvmkoin.utilities.ERROR_EXCEPTION_MSG
 import com.coding.mymvvmkoin.utilities.MY_MVVM_TAG
-import java.io.IOException
 import java.util.*
 
 class GitHubRepository(private val gitHubAPI: GitHubAPI, private val gitHubDao: GitHubDao) {
@@ -29,20 +28,20 @@ class GitHubRepository(private val gitHubAPI: GitHubAPI, private val gitHubDao: 
 
     // QUERY USERS
     suspend fun queryGiHubEntities(): LiveData<List<GitHubEntity>> {
-        return gitHubDao?.queryGitHubUsers()
+        return gitHubDao.queryGitHubUsers()
     }
 
     // REST GET
-    suspend fun getGitHubUsers(): ArrayList<GitHubUserModel>? {
+    suspend fun getGitHubUsers(queryVal:String): ArrayList<GitHubUserModel>? {
         return try {
-            val response = gitHubAPI.getGitHubUsers()
 
-            if(response.code() != 200){
+            val response = gitHubAPI.getGitHubUsers(queryVal)
+
+            if (!response.isSuccessful) {
                 throw Throwable(ERROR_EXCEPTION_MSG)
             }
 
-            return response.body()
-
+            return response.body()?.items
 
         } catch (cause: Throwable) {
             Log.d(MY_MVVM_TAG, "Error :$cause")

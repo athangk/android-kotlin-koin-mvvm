@@ -21,18 +21,18 @@ class MainViewModel(private val repository: GitHubRepository) : ViewModel() {
     }
 
     private var _userList: MutableLiveData<ArrayList<GitHubUserModel>> = MutableLiveData()
-    var userList: LiveData<ArrayList<GitHubUserModel>>
-
-    init {
-        userList = _userList
-    }
+    var userList: LiveData<ArrayList<GitHubUserModel>> = _userList
 
     fun getGitHubUsers() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 
+                // Change randomly the query string to show different results each time
+                val queryVal:String = ('A'..'Z').map { it }.shuffled().subList(0, 2).joinToString("")
 
-                var gitHubUserList: java.util.ArrayList<GitHubUserModel>? = repository.getGitHubUsers()
+                Log.d(MY_MVVM_TAG,"whats the random value ? $queryVal")
+
+                var gitHubUserList: ArrayList<GitHubUserModel>? = repository.getGitHubUsers(queryVal)
                     ?: throw Exception(ERROR_EXCEPTION_MSG)
 
                 if (gitHubUserList != null) {
@@ -51,8 +51,8 @@ class MainViewModel(private val repository: GitHubRepository) : ViewModel() {
 
     private fun sortUsers(gitHubUserList:ArrayList<GitHubUserModel>) :ArrayList<GitHubUserModel>{
             gitHubUserList?.sortWith { e1, e2 ->
-                e2.username.toLowerCase(Locale.ROOT)
-                    .compareTo(e1.username.toLowerCase(Locale.ROOT))
+                e1.username.toLowerCase(Locale.ROOT)
+                    .compareTo(e2.username.toLowerCase(Locale.ROOT))
             }
             return gitHubUserList
     }

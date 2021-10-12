@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.coding.mymvvmkoin.data.openHab.GitHubDao
 import com.coding.mymvvmkoin.data.openHab.GitHubEntity
+import com.coding.mymvvmkoin.utilities.GIT_HUB_DATABASE
 
 
 
@@ -29,7 +30,7 @@ abstract class GitHubRoomDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         GitHubRoomDatabase::class.java,
-                        "github_database"
+                        GIT_HUB_DATABASE
                     )
                         .fallbackToDestructiveMigration()
                         .build()

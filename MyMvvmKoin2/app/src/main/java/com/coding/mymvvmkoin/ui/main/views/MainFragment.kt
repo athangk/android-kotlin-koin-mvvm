@@ -1,6 +1,7 @@
 package com.coding.mymvvmkoin.ui.main.views
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModel()
     private lateinit var mainFragmentBinding: MainFragmentBinding
+    private lateinit var adapter: GitHubUserRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,17 +38,22 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerList(arrayListOf())
         mainFragmentBinding.noResults = true
 
         mainFragmentBinding.btnGetUsers.setOnClickListener {
+            resetRecyclerList()
             mainFragmentBinding.noResults = false
             mainFragmentBinding.isLoading = true
-            mainViewModel.getGitHubUsers()
+            Handler().postDelayed({
+                mainViewModel.getGitHubUsers()
+            }, 1000)
+
         }
 
         mainViewModel.userList.observe(viewLifecycleOwner, { it ->
             if (it.isNotEmpty()) {
-                initNotificationsList(it)
+                updateRecyclerList(it)
             } else {
                 mainFragmentBinding.noResults = true
             }
@@ -57,14 +64,10 @@ class MainFragment : Fragment() {
 
     }
 
-    private fun initNotificationsList(userRecyclerList: ArrayList<GitHubUserModel>) {
+    private fun initRecyclerList(userRecyclerList: ArrayList<GitHubUserModel>) {
 
-
-        Log.d(MY_MVVM_TAG, userRecyclerList.toString())
         mainFragmentBinding.userRecyclerList.visibility = View.VISIBLE
-
-
-        val adapter = context?.let { GitHubUserRecyclerAdapter(userRecyclerList, it) }
+        adapter = GitHubUserRecyclerAdapter(userRecyclerList, requireContext())
         mainFragmentBinding.userRecyclerList.setHasFixedSize(true)
         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
         mainFragmentBinding.userRecyclerList.layoutManager = mLayoutManager
@@ -75,6 +78,15 @@ class MainFragment : Fragment() {
         snapHelper.attachToRecyclerView(mainFragmentBinding.userRecyclerList)
 
     }
+
+    private fun resetRecyclerList() {
+        adapter.clearData()
+    }
+
+    private fun updateRecyclerList(userRecyclerList: ArrayList<GitHubUserModel>) {
+        adapter.updateData(userRecyclerList)
+    }
+
 
 }
 
