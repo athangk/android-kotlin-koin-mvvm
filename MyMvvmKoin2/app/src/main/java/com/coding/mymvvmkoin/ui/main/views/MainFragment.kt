@@ -11,6 +11,10 @@ import com.coding.mymvvmkoin.adapters.GitHubUserRecyclerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.coding.mymvvmkoin.databinding.MainFragmentBinding
 import com.coding.mymvvmkoin.models.GitHubUserModel
+import androidx.recyclerview.widget.LinearLayoutManager
+
+
+
 
 class MainFragment : Fragment() {
 
@@ -34,7 +38,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerList(arrayListOf())
+        initRecyclerList()
         mainFragmentBinding.noResults = true
 
         mainFragmentBinding.btnGetUsers.setOnClickListener {
@@ -60,19 +64,12 @@ class MainFragment : Fragment() {
 
     }
 
-    private fun initRecyclerList(userRecyclerList: ArrayList<GitHubUserModel>) {
-
-        mainFragmentBinding.userRecyclerList.visibility = View.VISIBLE
+    private fun initRecyclerList() {
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        mainFragmentBinding.userRecyclerList.layoutManager = linearLayoutManager
         adapter = GitHubUserRecyclerAdapter()
-        mainFragmentBinding.userRecyclerList.setHasFixedSize(true)
-        val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
-        mainFragmentBinding.userRecyclerList.layoutManager = mLayoutManager
         mainFragmentBinding.userRecyclerList.adapter = adapter
-
-        mainFragmentBinding.userRecyclerList.onFlingListener = null
-        val snapHelper: SnapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(mainFragmentBinding.userRecyclerList)
-
     }
 
 
